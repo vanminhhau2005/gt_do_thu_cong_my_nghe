@@ -1,0 +1,148 @@
+const products = [
+  {
+    name: 'Tượng Gỗ Khắc Tay Hình Rồng',
+    image: 'https://goanphat.com/store/product/images/large/13034439/13034439__8_.jpg',
+    description:
+      'Tác phẩm điêu khắc gỗ tinh xảo, thể hiện hình ảnh Rồng Á Đông mạnh mẽ, phù hợp trang trí phòng khách hoặc làm quà tặng cao cấp.',
+    brand: 'Nghệ Nhân Việt',
+    category: 'Điêu Khắc Gỗ',
+    price: 3500000,
+    countInStock: 8,
+    rating: 4.8,
+    numReviews: 12,
+  },
+  {
+    name: 'Khăn Choàng Tơ Tằm Thêu Hoa Sen',
+    image: 'https://via.placeholder.com/600x400/FFC0CB/000000?text=KhanToTam',
+    description:
+      'Khăn choàng 100% tơ tằm tự nhiên, được thêu tay họa tiết hoa sen truyền thống, mang lại vẻ đẹp thanh lịch và sang trọng.',
+    brand: 'Lụa Hà Đông',
+    category: 'Dệt May & Thêu',
+    price: 1250000,
+    countInStock: 5,
+    rating: 4.5,
+    numReviews: 25,
+  },
+  {
+    name: 'Tranh Sơn Mài Cảnh Làng Quê',
+    image: 'https://via.placeholder.com/600x400/5F9EA0/FFFFFF?text=TranhSonMai',
+    description:
+      'Tranh sơn mài vẽ tay mô tả cảnh sinh hoạt làng quê Việt Nam, sử dụng kỹ thuật truyền thống nhiều lớp, độ bền vĩnh cửu.',
+    brand: 'Họa Sĩ An',
+    category: 'Hội Họa',
+    price: 6800000,
+    countInStock: 2,
+    rating: 5.0,
+    numReviews: 7,
+  },
+  {
+    name: 'Đèn Lồng Hội An Tre Mộc',
+    image: 'https://via.placeholder.com/600x400/F0E68C/000000?text=DenLongHoiAn',
+    description:
+      'Đèn lồng tre thủ công, có thể gấp gọn, thích hợp cho trang trí không gian hoài cổ, mang đậm nét văn hóa phố cổ Hội An.',
+    brand: 'Thợ Thủ Công Phố Hội',
+    category: 'Trang Trí',
+    price: 280000,
+    countInStock: 30,
+    rating: 4.3,
+    numReviews: 45,
+  },
+  {
+    name: 'Bình Gốm Hoa Văn Cổ',
+    image: 'https://via.placeholder.com/600x400/D2B48C/000000?text=BinhGomCo',
+    description:
+      'Bình gốm Bát Tràng hoa văn cổ điển, nung ở nhiệt độ cao cho độ bền tuyệt đối, mang phong cách truyền thống.',
+    brand: 'Gốm Bát Tràng',
+    category: 'Gốm Sứ',
+    price: 890000,
+    countInStock: 15,
+    rating: 4.7,
+    numReviews: 19,
+  },
+  {
+    name: 'Tranh Thêu Phong Cảnh Thiên Nhiên',
+    image: 'https://via.placeholder.com/600x400/90EE90/000000?text=TranhTheu',
+    description:
+      'Tranh thêu tay phong cảnh thiên nhiên, từng đường kim mũi chỉ tỉ mỉ, thể hiện vẻ đẹp thanh thoát và tinh tế.',
+    brand: 'Thêu Tay Huế',
+    category: 'Thêu Tay',
+    price: 2400000,
+    countInStock: 4,
+    rating: 4.9,
+    numReviews: 10,
+  },
+  {
+    name: 'Hộp Mây Đan Tròn',
+    image: 'https://via.placeholder.com/600x400/DEB887/000000?text=HopMayDan',
+    description:
+      'Hộp mây đan thủ công bằng tay, thân thiện với môi trường, có thể dùng làm hộp quà, hộp đựng trang sức.',
+    brand: 'Làng Nghề Củ Chi',
+    category: 'Đan Lát',
+    price: 320000,
+    countInStock: 20,
+    rating: 4.4,
+    numReviews: 16,
+  },
+  {
+    name: 'Chuỗi Hạt Trầm Hương',
+    image: 'https://via.placeholder.com/600x400/8B4513/FFFFFF?text=TramHuong',
+    description:
+      'Chuỗi hạt trầm hương tự nhiên cao cấp, mang mùi thơm dịu, giúp tĩnh tâm và thu hút năng lượng tích cực.',
+    brand: 'Trầm Việt',
+    category: 'Trang Sức',
+    price: 4500000,
+    countInStock: 6,
+    rating: 4.8,
+    numReviews: 23,
+  },
+  {
+    name: 'Bức Tượng Phật Di Lặc Mini',
+    image: 'https://via.placeholder.com/600x400/F5DEB3/000000?text=TuongPhatMini',
+    description:
+      'Tượng Phật Di Lặc gỗ hương nhỏ gọn, phù hợp đặt bàn làm việc hoặc xe hơi, mang ý nghĩa tài lộc và may mắn.',
+    brand: 'Nghệ Nhân Việt',
+    category: 'Điêu Khắc Gỗ',
+    price: 950000,
+    countInStock: 12,
+    rating: 4.6,
+    numReviews: 18,
+  },
+  {
+    name: 'Túi Vải Thổ Cẩm Hoa Văn Tây Bắc',
+    image: 'https://via.placeholder.com/600x400/CD5C5C/FFFFFF?text=TuiThoCam',
+    description:
+      'Túi vải thổ cẩm được dệt tay bởi người H’Mông, hoa văn truyền thống, sử dụng vật liệu thân thiện môi trường.',
+    brand: 'Thổ Cẩm Sa Pa',
+    category: 'Thời Trang',
+    price: 560000,
+    countInStock: 10,
+    rating: 4.5,
+    numReviews: 30,
+  },
+  {
+    name: 'Khung Ảnh Gỗ Handmade',
+    image: 'https://via.placeholder.com/600x400/708090/FFFFFF?text=KhungAnhGo',
+    description:
+      'Khung ảnh gỗ tự nhiên thiết kế đơn giản, phủ sáp ong bảo vệ, phù hợp treo tường hoặc bàn làm việc.',
+    brand: 'Mộc Việt',
+    category: 'Trang Trí',
+    price: 180000,
+    countInStock: 25,
+    rating: 4.2,
+    numReviews: 8,
+  },
+  {
+    name: 'Đèn Mây Tre Trang Trí Phòng Ngủ',
+    image: 'https://via.placeholder.com/600x400/F5F5DC/000000?text=DenMayTre',
+    description:
+      'Đèn trang trí mây tre thủ công, ánh sáng dịu nhẹ, tạo không gian ấm cúng và gần gũi thiên nhiên.',
+    brand: 'Làng Tre Việt',
+    category: 'Trang Trí',
+    price: 720000,
+    countInStock: 18,
+    rating: 4.7,
+    numReviews: 22,
+  },
+];
+
+export default products;

@@ -1,0 +1,35 @@
+.about-page {
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+
+.about-banner {
+  background: url("https://images.unsplash.com/photo-1547826039-bfc35e0f1e78?q=80&w=1200&auto=format&fit=crop")
+    center/cover no-repeat;
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+}
+
+.about-banner h1 {
+  font-size: 42px;
+  font-weight: bold;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.about-content {
+  max-width: 900px;
+  margin: 40px auto;
+  line-height: 1.8;
+}
+
+.about-content h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #8b5e34; /* màu nâu gỗ */
+}
+
+.about-content p {
+  margin-bottom: 18px;
+  font-size: 16px;
+}
