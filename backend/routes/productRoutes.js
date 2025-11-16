@@ -1,23 +1,30 @@
-// routes/productRoutes.js
 import express from 'express';
+import asyncHandler from 'express-async-handler';
+import Product from '../models/Product.js';
+
 const router = express.Router();
-import {
-  getProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-} from '../controllers/productController.js'; // ⬅️ Đã thêm .js
 
-// Route GET và POST (Thêm mới)
-router.route('/')
-    .get(getProducts)           
-    .post(createProduct);       
+// GET /api/products - Lấy tất cả sản phẩm
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
+    const products = await Product.find({});
+    res.json(products);
+  })
+);
 
-// Route GET, PUT, DELETE theo ID
-router.route('/:id')
-    .get(getProductById)        
-    .put(updateProduct)         
-    .delete(deleteProduct);     
+// GET /api/products/:id - Lấy chi tiết 1 sản phẩm
+router.get(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      res.json(product);
+    } else {
+      res.status(404);
+      throw new Error('Product not found');
+    }
+  })
+);
 
 export default router;

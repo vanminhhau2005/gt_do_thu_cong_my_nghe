@@ -1,53 +1,20 @@
-// models/Product.js
 import mongoose from 'mongoose';
 
 const productSchema = mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    image: {
-      type: String,
-      required: true,
-      default: '/images/sample.jpg',
-    },
-    category: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    countInStock: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    // Trường tạm thời cho mục đích giới thiệu cơ bản
-    rating: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    numReviews: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
+    title: { type: String, required: true },
+    category: { type: String, required: true },
+    image: { type: String, required: true },
+    description: { type: String },
+    origin: { type: String },
+    process: { type: String },
+    price: { type: Number, required: true },
+    rating: { type: Number },
+    sold: { type: Number, default: 0 }
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', productSchema, 'do thu cong');
 
 export default Product;
