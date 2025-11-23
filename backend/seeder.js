@@ -1,22 +1,21 @@
 // seeder.js
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import products from './data/products.js'; 
-import Product from './models/Product.js'; // ⬅️ Model đã tạo
-import connectDB from './config/db.js'; // ⬅️ Kết nối DB
+import products from './data/products.js';
+import Product from './models/Product.js';
+import connectDB from './config/db.js';
 
 dotenv.config();
-// KHÔNG cần gọi connectDB() ở đây, nó sẽ được gọi trong hàm importData
 
 const importData = async () => {
   try {
-    // Gọi kết nối DB trước khi thao tác
+    console.log("🔗 Connecting to MongoDB...");
     await connectDB();
-    
-    // 1. Xóa tất cả dữ liệu cũ
+
+    console.log("🗑️ Clearing old products...");
     await Product.deleteMany();
 
-    // 2. Chèn dữ liệu mới vào
+    console.log("📦 Importing new products...");
     await Product.insertMany(products);
 
     console.log('✅ Data Imported Successfully!');
@@ -29,10 +28,10 @@ const importData = async () => {
 
 const destroyData = async () => {
   try {
-    // Gọi kết nối DB trước khi thao tác
+    console.log("🔗 Connecting to MongoDB...");
     await connectDB();
-    
-    // 1. Xóa tất cả dữ liệu
+
+    console.log("🗑️ Destroying all products...");
     await Product.deleteMany();
 
     console.log('🗑️ Data Destroyed Successfully!');
@@ -43,7 +42,7 @@ const destroyData = async () => {
   }
 };
 
-// Lệnh để chạy seeder (VD: node seeder.js -d)
+// Chạy seeder: node seeder.js -d (xoá) hoặc node seeder.js (import)
 if (process.argv[2] === '-d') {
   destroyData();
 } else {

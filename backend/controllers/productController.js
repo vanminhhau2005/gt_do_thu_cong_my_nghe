@@ -1,77 +1,73 @@
-// controllers/productController.js
-import Product from '../models/Product.js'; 
-import asyncHandler from 'express-async-handler'; // Cần npm install express-async-handler
+import Product from '../models/Product.js';
+import asyncHandler from 'express-async-handler';
 
-// @desc    Lấy tất cả sản phẩm
-// @route   GET /api/products
-// @access  Public
+// helper: chuyển _id sang string
+const normalize = (doc) => {
+  if (!doc) return doc;
+
+  if (Array.isArray(doc)) {
+    return doc.map(d => ({ ...d, _id: String(d._id) }));
+  }
+
+  return { ...doc, _id: String(doc._id) };
+};
+
+// @desc GET tất cả sản phẩm
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
-  res.json(products);
+  const products = await Product.find({}).lean();
+  res.json(normalize(products));
 });
 
-// @desc    Lấy 1 sản phẩm theo ID
-// @route   GET /api/products/:id
-// @access  Public
+// @desc GET 1 sản phẩm theo ID
 const getProductById = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).lean();
 
-  if (product) {
-    res.json(product);
-  } else {
+  if (!product) {
     res.status(404);
     throw new Error('Sản phẩm không tìm thấy');
   }
+
+  res.json(normalize(product));
 });
 
-// @desc    Tạo sản phẩm mới (Dành cho Admin)
-// @route   POST /api/products
-// @access  Private/Admin
+// @desc Tạo sản phẩm mới (Admin)
 const createProduct = asyncHandler(async (req, res) => {
-  const product = await Product.create(req.body); // Tạo sản phẩm từ req.body
+  const product = await Product.create(req.body);
 
-  if (product) {
-    res.status(201).json(product);
-  } else {
-    res.status(400);
-    throw new Error('Dữ liệu sản phẩm không hợp lệ');
-  }
+  const obj = product.toObject();
+  res.status(201).json(normalize(obj));
 });
 
-// @desc    Cập nhật sản phẩm (Dành cho Admin)
-// @route   PUT /api/products/:id
-// @access  Private/Admin
+// @desc Cập nhật sản phẩm (Admin)
 const updateProduct = asyncHandler(async (req, res) => {
-  const updatedProduct = await Product.findByIdAndUpdate(
-    req.params.id, 
-    req.body, 
+  const updated = await Product.findByIdAndUpdate(
+    req.params.id,
+    req.body,
     { new: true, runValidators: true }
   );
 
-  if (updatedProduct) {
-    res.json(updatedProduct);
-  } else {
+  if (!updated) {
     res.status(404);
     throw new Error('Sản phẩm không tìm thấy');
   }
+
+  res.json(normalize(updated.toObject()));
 });
 
-// @desc    Xóa sản phẩm (Dành cho Admin)
-// @route   DELETE /api/products/:id
-// @access  Private/Admin
+// @desc Xóa sản phẩm (Admin)
 const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findByIdAndDelete(req.params.id);
+  const deleted = await Product.findByIdAndDelete(req.params.id);
 
-  if (product) {
-    res.json({ message: 'Đã xóa sản phẩm thành công' });
-  } else {
+  if (!deleted) {
     res.status(404);
     throw new Error('Sản phẩm không tìm thấy');
   }
+
+  res.json({ message: 'Đã xóa sản phẩm thành công' });
 });
 
-export { 
-  getProducts, 
+export {
+  getProducts,
   getProductById,
   createProduct,
   updateProduct,

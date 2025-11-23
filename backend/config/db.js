@@ -12,4 +12,4 @@ const connectDB = async () => {
   }
 };
 
-export default connectDB; // ⬅️ PHẢI CÓ 'default' Ở ĐÂY
+export default connectDB;

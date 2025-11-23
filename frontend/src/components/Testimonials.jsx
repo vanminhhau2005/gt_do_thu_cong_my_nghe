@@ -3,6 +3,8 @@ import React from 'react';
 const testimonials = [
   { name: 'Nguyễn Văn A', content: 'Sản phẩm đẹp, giao hàng nhanh và dịch vụ tận tình.' },
   { name: 'Trần Thị B', content: 'Chất lượng tuyệt vời, rất hài lòng khi mua ở đây!' },
+  { name: 'Lê Văn C', content: 'Đồ thủ công rất tinh xảo, giá cả hợp lý.' },
+  { name: 'Phạm Thị D', content: 'Tôi sẽ giới thiệu cửa hàng này cho bạn bè và người thân.' },
 ];
 
 export default function Testimonials() {

@@ -1,13 +1,6 @@
 // src/components/Products.jsx
 import React, { useEffect, useState } from "react";
 
-/**
- * Products.jsx
- * - Lấy dữ liệu từ API: http://localhost:5000/api/products
- * - Hiển thị sản phẩm, filter, sort, modal chi tiết, giỏ hàng
- * - Yêu cầu: Tailwind CSS đã cấu hình
- */
-
 const API_URL = "http://localhost:5000/api/products";
 
 function formatPrice(v) {
@@ -221,7 +214,7 @@ export default function Products() {
                 <div className="mt-auto">
                   <div className="flex items-center justify-between mb-4">
                     <div className="text-2xl font-bold text-amber-600">{formatPrice(selected.price ?? 0)}</div>
-                    <div className="text-sm text-gray-500">Mã: {selected._id ?? selected.id}</div>
+                    <div className="text-sm text-gray-500"> Mã: {selected?.code ?? selected?._id ?? selected?.id}</div> {/* HIỂN THỊ DẠNG ID SỐ */}
                   </div>
 
                   <div className="flex gap-3">
