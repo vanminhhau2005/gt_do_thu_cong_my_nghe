@@ -5,9 +5,9 @@ const connectDB = async () => {
   try {
     // Đảm bảo MONGO_URI đã được đặt trong file .env
     const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    console.log(`thành công: ${conn.connection.host}`);
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error.message);
+    console.error("lỗi:", error.message);
     process.exit(1); 
   }
 };

@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
@@ -6,6 +5,7 @@ export default function Header() {
   const headerRef = useRef(null);
   const navRef = useRef(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     gsap.from(headerRef.current, {
@@ -22,6 +22,11 @@ export default function Header() {
       duration: 0.5,
     });
   }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log("Tìm kiếm:", searchTerm);
+  };
 
   return (
     <header
@@ -42,17 +47,34 @@ export default function Header() {
         </div>
 
         {/* Menu Desktop */}
-        <nav
-          ref={navRef}
-          className="hidden md:flex items-center gap-6 text-white/90"
-        >
-          <a href="#home">Trang Chủ</a>
-          <a href="#products">Giới Thiệu</a>
-          <a href="#about">Sản Phẩm</a>
-          <a href="#gallery">Bộ Sưu Tập</a>
-          <a href="#contact">Tin Tức</a>
-          <a href="#nam">Liên Hệ</a>
-        </nav>
+        <div className="hidden md:flex items-center gap-6 text-white/90">
+          <nav ref={navRef} className="flex items-center gap-6 text-white/90">
+            <a href="#about" className="flex items-center gap-1">
+              <i className="bi bi-info-circle"></i> Giới Thiệu
+            </a>
+            <a href="#products" className="flex items-center gap-1">
+              <i className="bi bi-box-seam"></i> Sản Phẩm
+            </a>
+            <a href="#contact" className="flex items-center gap-1">
+              <i className="bi bi-envelope"></i> Liên Hệ
+            </a>
+            <a href="#order" className="flex items-center gap-1">
+              <i className="bi bi-cart"></i> Đặt Hàng
+            </a>
+          </nav>
+
+          {/* Ô tìm kiếm Desktop */}
+          <form onSubmit={handleSearch} className="ml-4 relative flex items-center">
+            <i className="bi bi-search absolute left-2 text-gray-500"></i>
+            <input
+              type="text"
+              placeholder="Tìm kiếm..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-7 pr-2 py-1 rounded text-black"
+            />
+          </form>
+        </div>
 
         {/* Nút mở Menu Mobile */}
         <div className="md:hidden flex items-center">
@@ -60,58 +82,54 @@ export default function Header() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="w-8 h-8 flex justify-center items-center bg-white/20 rounded-full text-white text-2xl"
           >
-            ☰
+            <i className="bi bi-list"></i>
           </button>
         </div>
       </div>
 
       {/* MENU MOBILE */}
       {mobileOpen && (
-        <div
-          className="md:hidden mt-2 bg-black/90 rounded-lg py-4 flex flex-col items-center gap-3 z-50 relative animate-slideDown"
-        >
+        <div className="md:hidden mt-2 bg-black/90 rounded-lg py-4 flex flex-col items-center gap-3 z-50 relative animate-slideDown">
           <a
-            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded"
-            href="#home"
-            onClick={() => setMobileOpen(false)}
-          >
-            Trang Chủ
-          </a>
-          <a
-            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded"
-            href="#products"
-            onClick={() => setMobileOpen(false)}
-          >
-            Giới Thiệu
-          </a>
-          <a
-            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded"
+            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded flex items-center gap-1"
             href="#about"
             onClick={() => setMobileOpen(false)}
           >
-            Sản Phẩm
+            <i className="bi bi-info-circle"></i> Giới Thiệu
           </a>
           <a
-            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded"
-            href="#gallery"
+            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded flex items-center gap-1"
+            href="#products"
             onClick={() => setMobileOpen(false)}
           >
-            Bộ Sưu Tập
+            <i className="bi bi-box-seam"></i> Sản Phẩm
           </a>
           <a
-            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded"
+            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded flex items-center gap-1"
             href="#contact"
             onClick={() => setMobileOpen(false)}
           >
-            Tin Tức
+            <i className="bi bi-envelope"></i> Liên Hệ
           </a>
           <a
-            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded"
-            href="#contact"
+            className="px-6 py-2 w-full text-center text-white hover:bg-white/20 rounded flex items-center gap-1"
+            href="#order"
             onClick={() => setMobileOpen(false)}
           >
-            Liên Hệ
+            <i className="bi bi-cart"></i> Đặt Hàng
           </a>
+
+          {/* Ô tìm kiếm Mobile */}
+          <form onSubmit={handleSearch} className="w-full px-6 mt-2 relative flex items-center">
+            <i className="bi bi-search absolute left-2 text-gray-500"></i>
+            <input
+              type="text"
+              placeholder="Tìm kiếm..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-7 pr-2 py-1 rounded text-black"
+            />
+          </form>
         </div>
       )}
     </header>

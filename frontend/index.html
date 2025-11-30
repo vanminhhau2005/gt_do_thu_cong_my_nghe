@@ -1,12 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
+    <!-- Thiết lập mã hóa ký tự -->
     <meta charset="UTF-8" />
+
+<!--nhúng Bootstrap Icons -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+/>
+
+
+    <!-- Thiết lập responsive cho điện thoại, máy tính bảng -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GT Craftshop Frontend</title>
+
+    <!-- Tiêu đề trang hiển thị trên tab trình duyệt và Google -->
+    <title>GT Craftshop – Thủ công mỹ nghệ Việt Nam</title>
+
+    <!-- Mô tả ngắn về trang, giúp SEO và hiển thị trong kết quả tìm kiếm -->
+    <meta name="description" content="GT Craftshop cung cấp sản phẩm thủ công tinh xảo, giao hàng toàn quốc." />
+
+    <!-- URL chuẩn của trang (tránh trùng lặp nội dung) -->
+    <link rel="canonical" href="https://your-domain.com/" />
+
+    <!-- Open Graph (dùng khi chia sẻ lên Facebook, Zalo, Messenger) -->
+    <meta property="og:type" content="website" /> <!-- Loại trang -->
+    <meta property="og:title" content="GT Craftshop – Thủ công mỹ nghệ Việt Nam" /> <!-- Tiêu đề khi share -->
+    <meta property="og:description" content="GT Craftshop cung cấp sản phẩm thủ công tinh xảo, giao hàng toàn quốc." /> <!-- Mô tả khi share -->
+    <meta property="og:image" content="/og-image.jpg" /> <!-- Ảnh khi share -->
+    <meta property="og:url" content="https://your-domain.com/" /> <!-- Link chuẩn khi share -->
+
+    <!-- Twitter Card (hiển thị đẹp khi chia sẻ trên Twitter) -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured data JSON-LD (tùy chọn, giúp rich snippet hiển thị trên Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "GT Craftshop",
+      "url": "https://your-domain.com",
+      "logo": "https://your-domain.com/logo.png"
+    }
+    </script>
+
+    <!-- Favicon (icon hiển thị trên tab trình duyệt) -->
+    <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
+    <!-- React sẽ render App.jsx vào div này -->
     <div id="root"></div>
+
+    <!-- File main của React, chứa App.jsx -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

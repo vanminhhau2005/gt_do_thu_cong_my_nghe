@@ -1,242 +1,114 @@
-// src/components/Products.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const API_URL = "http://localhost:5000/api/products";
+// Products.jsx
+// Simplified: removed boxed panels and background blobs per user's request.
+// Retains GSAP entry animations and a soft gradient background.
+// Place in src/components/Products.jsx. Requires Tailwind + GSAP.
 
-function formatPrice(v) {
-  return new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(v);
-}
-
-function Stars({ rating }) {
-  const n = Math.round(rating || 0);
-  return (
-    <div className="flex items-center gap-1">
-      {[...Array(5)].map((_, i) => (
-        <span key={i} className={i < n ? "text-yellow-400" : "text-gray-300"}>★</span>
-      ))}
-      <span className="text-xs text-gray-500 ml-2">({rating ?? 0})</span>
-    </div>
-  );
-}
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const products = [
+    { id: 1, title: "Gốm Bát Tràng bình hoa tay vẽ", 
+    note: "Gốm Bát Tràng – Bình hoa tay vẽ là sản phẩm tiêu biểu của làng nghề truyền thống Việt Nam, kết tinh từ hơn 500 năm lịch sử và bàn tay tài hoa của nghệ nhân. Chiếc bình được tạo hình từ đất sét tinh luyện, qua nhiều công đoạn thủ công như nặn, nung và phủ men rạn cổ truyền, tạo nên vẻ đẹp mộc mạc nhưng sang trọng. Trên nền gốm, từng họa tiết được vẽ tay tỉ mỉ, mang lại sự độc bản và khẳng định giá trị nghệ thuật riêng biệt. Bình hoa không chỉ là vật dụng trang trí, có thể dùng để cắm hoa, mà còn là biểu tượng văn hóa, giúp kết nối con người với truyền thống trong đời sống hiện đại. Sở hữu một bình hoa gốm Bát Tràng tay vẽ chính là lưu giữ hồn Việt, là cách trân trọng nghệ thuật thủ công và khẳng định rằng giá trị truyền thống luôn có chỗ đứng trong không gian sống hôm nay.", 
+    img: "src/assets/A1.png" },
+    { id: 2, title: "Đồ mây tre giỏ đựng đa năng", 
+    note: "Đồ mây tre - Giỏ đựng đa năng là sản phẩm thủ công được làm từ chất liệu tự nhiên, mang lại sự bền chắc và tính thẩm mỹ cao. Với thiết kế đơn giản nhưng tinh tế, giỏ có thể sử dụng để sắp xếp quần áo, phụ kiện, đồ dùng gia đình hoặc làm vật trang trí, giúp không gian sống trở nên gọn gàng và ấm cúng hơn. Sự kết hợp giữa công năng và vẻ đẹp mộc mạc khiến giỏ đựng đa năng bằng mây tre trở thành lựa chọn lý tưởng cho mọi gia đình.", 
+    img: "src/assets/A2.png" },
+    { id: 3, title: "Khăn tơ tằm thêu tay", 
+    note: "Khăn tơ tằm thêu tay là sự kết hợp hoàn hảo giữa chất liệu cao cấp và kỹ thuật thủ công tinh xảo. Mỗi chiếc khăn được dệt từ sợi tơ tằm mềm mại, bóng mượt, và được nghệ nhân tỉ mỉ thêu từng mũi chỉ, tạo nên những hoa văn sống động và độc đáo. Không chỉ là phụ kiện thời trang, mỗi chiếc khăn còn mang trong mình câu chuyện văn hóa Việt Nam, từ những họa tiết truyền thống đến những chi tiết hiện đại, tinh tế.", 
+    img: "src/assets/A3.png" },
+    { id: 4, title: "Tranh sơn mài nghệ thuật truyền thống",
+    note: "Tranh sơn mài nghệ thuật truyền thống là kết tinh của kỹ thuật thủ công tinh xảo và vẻ đẹp văn hóa Việt Nam. Mỗi bức tranh được chế tác tỉ mỉ qua nhiều lớp sơn và đánh bóng, với hoa văn và màu sắc độc đáo, tạo ra hiệu ứng ánh sáng lung linh. Tranh sơn mài không chỉ là vật trang trí mà còn là tác phẩm nghệ thuật kể câu chuyện truyền thống, mang đến vẻ đẹp sang trọng và tinh tế cho không gian sống.", 
+    img: "src/assets/A4.jpg" },
+    { id: 5, title: "Đồ gỗ chạm khắc - Hộp trang sức", 
+    note: "Hộp trang sức gỗ chạm khắc là minh chứng cho tay nghề điêu luyện của các nghệ nhân Việt Nam. Mỗi chiếc hộp được làm từ loại gỗ chọn lọc, chạm khắc thủ công tỉ mỉ với những hoa văn tinh tế và họa tiết độc đáo. Sản phẩm không chỉ bảo vệ và lưu giữ trang sức mà còn là món đồ trang trí nghệ thuật, thể hiện vẻ đẹp truyền thống và sự khéo léo trong từng chi tiết.", 
+    img: "src/assets/A5.png" },
+    { id: 6, title: "Nón lá thêu tay", 
+    note: "Nón lá thêu tay là sự kết hợp hoàn hảo giữa truyền thống và nghệ thuật thủ công tinh xảo. Mỗi chiếc nón được chọn loại lá mềm, bền, và được nghệ nhân thêu từng họa tiết tỉ mỉ, tạo nên những hoa văn độc đáo. Nón không chỉ là vật dụng che nắng, bảo vệ sức khỏe mà còn là món đồ văn hóa, lưu giữ tinh hoa của thủ công mỹ nghệ Việt Nam, mang đến vẻ đẹp thanh lịch và độc đáo cho người sử dụng.",
+    img: "src/assets/A6.png" },
+    { id: 7, title: "Đồ gốm men lam - Chén trà bộ", note: "Bộ chén trà men lam, phong cách tối giản, cảm hứng Nhật-Việt.", img: "https://images.unsplash.com/photo-1526178614862-9f5c9d2b51f8?auto=format&fit=crop&w=1200&q=60" },
+    { id: 8, title: "Thảm thổ cẩm - Tay dệt", note: "Thảm dệt tay với họa tiết dân tộc, chất liệu bền và mềm mại.", img: "https://images.unsplash.com/photo-1505691723518-36a5b0b1f3b9?auto=format&fit=crop&w=1200&q=60" },
+  ];
 
-  const [filter, setFilter] = useState("all");
-  const [sortBy, setSortBy] = useState("popular");
-
-  const [cart, setCart] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const containerRef = useRef(null);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const res = await fetch(API_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        console.log("DEBUG: products from API:", data);
-        setProducts(data);
-      } catch (err) {
-        console.error("Fetch products error:", err);
-        setError(err.message || "Error fetching products");
-      } finally {
-        setLoading(false);
+    const cards = containerRef.current?.querySelectorAll('.card') || [];
+
+    gsap.fromTo(cards,
+      { y: 30, autoAlpha: 0, scale: 0.98 },
+      {
+        y: 0,
+        autoAlpha: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 85%'
+        }
       }
-    };
-    fetchProducts();
+    );
+
+    return () => ScrollTrigger.getAll().forEach(st => st.kill());
   }, []);
 
-  // categories available from products (dynamic)
-  const categories = ["all", ...Array.from(new Set(products.map((p) => p.category).filter(Boolean)))];
-
-  // filtering & sorting
-  let visible = products.filter((p) => filter === "all" || p.category === filter);
-
-  if (sortBy === "price-asc") visible.sort((a, b) => a.price - b.price);
-  if (sortBy === "price-desc") visible.sort((a, b) => b.price - a.price);
-  if (sortBy === "rating") visible.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-  if (sortBy === "popular") visible.sort((a, b) => (b.sold || 0) - (a.sold || 0));
-
-  const addToCart = (p) => {
-    setCart((s) => [...s, p]);
-  };
-
-  const openDetail = (p) => setSelected(p);
-  const closeDetail = () => setSelected(null);
-
   return (
-    <section id="products" className="py-12 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4">
-        <header className="mb-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Sản phẩm nổi bật</h2>
-          <p className="text-gray-600 mt-2">Đồ thủ công mỹ nghệ chọn lọc — làm tay bởi nghệ nhân.</p>
+    <section ref={sectionRef} className="relative overflow-hidden py-16">
+      {/* Soft gradient background kept for contrast */}
+      <div className="absolute -z-10 inset-0 bg-gradient-to-b from-[#FFF9F5] to-[#F6FBFF]" />
+
+      <div className="max-w-6xl mx-auto px-6">
+        <header className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">Khám phá một số đồ thủ công mỹ nghệ Việt Nam nổi bật!</h2>
+          <p className="mt-3 text-slate-600 max-w-2xl mx-auto">Một hành trình ngắn qua tay nghề, chất liệu và câu chuyện của từng sản phẩm.</p>
         </header>
 
-        {/* Controls */}
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 justify-between mb-6">
-          <div className="flex gap-2 flex-wrap">
-            {categories.map((c) => (
-              <button
-                key={c}
-                onClick={() => setFilter(c)}
-                className={`px-4 py-2 rounded-lg font-semibold transition ${
-                  filter === c ? "bg-amber-600 text-white" : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                {c === "all" ? "Tất cả" : c}
-              </button>
-            ))}
-          </div>
+        <div ref={containerRef} className="space-y-12">
+          {products.map((p, idx) => {
+            const imageLeft = idx % 2 === 0;
+            return (
+              <article key={p.id} className="card transform opacity-0" aria-labelledby={`prod-${p.id}`}>
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
 
-          <div className="flex items-center gap-3">
-            <label className="text-sm text-gray-600">Sắp xếp:</label>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg"
-            >
-              <option value="popular">Phổ biến nhất</option>
-              <option value="price-asc">Giá thấp → cao</option>
-              <option value="price-desc">Giá cao → thấp</option>
-              <option value="rating">Đánh giá cao nhất</option>
-            </select>
-          </div>
-        </div>
+                  <div className={`${imageLeft ? 'md:col-span-6 md:order-1' : 'md:col-span-6 md:order-2'} flex justify-center`}>
+                    {/* Image without extra white panel */}
+                    <img src={p.img} alt={p.title} className="w-full max-w-xl h-auto md:h-[420px] object-contain object-center rounded-none shadow-none border-0 bg-transparent" />
+                  </div>
 
-        {/* Loading / Error */}
-        {loading && <div className="text-center py-12">Đang tải sản phẩm...</div>}
-        {error && <div className="text-center py-6 text-red-600">Lỗi: {error}</div>}
+                  <div className={`${imageLeft ? 'md:col-span-6 md:order-2' : 'md:col-span-6 md:order-1'}`}>
+                    {/* Plain text block (no boxed panel) */}
+                    <div className="p-2 md:p-0">
+                      <h3 id={`prod-${p.id}`} className="text-2xl md:text-3xl font-semibold text-slate-900">{p.title}</h3>
+                      <p className="mt-3 text-slate-600 leading-relaxed">{p.note}</p>
 
-        {/* Grid */}
-        {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-            {visible.map((p) => (
-              <article
-                key={p._id ?? p.id}
-                className="bg-white rounded-xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden"
-              >
-                <div className="flex flex-col md:flex-row items-stretch">
-                  {/* Left: info */}
-                  <div className="md:w-1/2 p-5 flex flex-col">
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-900">{p.title}</h3>
-                      <p className="text-sm text-gray-500 mt-1">{p.description}</p>
-                    </div>
-
-                    <div className="mt-4 text-sm text-gray-600">
-                      <p><strong>Chất liệu:</strong> {p.origin ?? "—"}</p>
-                      <p className="mt-2"><strong>Quy trình:</strong> {p.process ?? "—"}</p>
-                    </div>
-
-                    <div className="mt-auto flex items-center justify-between gap-3">
-                      <div>
-                        <div className="text-2xl font-bold text-amber-600">{formatPrice(p.price ?? 0)}</div>
-                        <div className="text-xs text-gray-500">Đã bán: {p.sold ?? 0}</div>
+                      <div className="mt-4 flex flex-wrap gap-3 text-sm text-slate-500 items-center">
+                        <span className="px-2 py-0.5 rounded text-slate-600">Thủ công</span>
+                        <span className="px-2 py-0.5 rounded text-slate-600">Việt Nam</span>
                       </div>
 
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => addToCart(p)}
-                          className="bg-amber-600 hover:bg-amber-700 text-white py-2 px-3 rounded-lg font-semibold"
-                        >
-                          🛒 Thêm
-                        </button>
-                        <button
-                          onClick={() => openDetail(p)}
-                          className="bg-white border border-gray-200 hover:bg-gray-100 text-gray-800 py-2 px-3 rounded-lg font-semibold"
-                        >
-                          👁️ Xem
-                        </button>
-                      </div>
+                      
                     </div>
                   </div>
 
-                  {/* Right: image */}
-                  <div className="md:w-1/2 h-64 md:h-auto overflow-hidden bg-gray-100 relative">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110 cursor-pointer"
-                      onClick={() => openDetail(p)}
-                      loading="lazy"
-                    />
-                    <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      {p.rating ? `${p.rating}⭐` : "—"}
-                    </div>
-                  </div>
                 </div>
               </article>
-            ))}
+            );
+          })}
+        </div>
 
-            {visible.length === 0 && (
-              <div className="col-span-full text-center py-12 text-gray-600">Không có sản phẩm phù hợp.</div>
-            )}
-          </div>
-        )}
+        <footer className="text-center mt-14 text-sm text-slate-600">© Bộ sưu tập thủ công — Tôn vinh nghệ nhân Việt Nam</footer>
       </div>
 
-      {/* Cart badge */}
-      {cart.length > 0 && (
-        <div className="fixed bottom-6 right-6 bg-amber-600 text-white px-4 py-2 rounded-full shadow-lg z-50">
-          🛒 {cart.length} sản phẩm
-        </div>
-      )}
-
-      {/* Detail modal */}
-      {selected && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4"
-          onClick={closeDetail}
-        >
-          <div
-            className="bg-white rounded-lg overflow-hidden max-w-4xl w-full shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="h-80 md:h-auto">
-                <img src={selected.image} alt={selected.title} className="w-full h-full object-cover" />
-              </div>
-              <div className="p-6 flex flex-col">
-                <h3 className="text-2xl font-bold mb-2">{selected.title}</h3>
-                <p className="text-sm text-gray-500 mb-3">{selected.subtitle ?? selected.title}</p>
-                <p className="text-gray-700 mb-4">{selected.description}</p>
-
-                <div className="text-sm text-gray-600 mb-4">
-                  <p><strong>Chất liệu:</strong> {selected.origin ?? "—"}</p>
-                  <p className="mt-2"><strong>Quy trình:</strong> {selected.process ?? "—"}</p>
-                  <p className="mt-2"><strong>Đã bán:</strong> {selected.sold ?? 0}</p>
-                </div>
-
-                <div className="mt-auto">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-2xl font-bold text-amber-600">{formatPrice(selected.price ?? 0)}</div>
-                    <div className="text-sm text-gray-500"> Mã: {selected?.code ?? selected?._id ?? selected?.id}</div> {/* HIỂN THỊ DẠNG ID SỐ */}
-                  </div>
-
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => { addToCart(selected); closeDetail(); }}
-                      className="flex-1 bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold"
-                    >
-                      🛒 Thêm vào giỏ
-                    </button>
-                    <button
-                      onClick={closeDetail}
-                      className="flex-0 bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-4 rounded-lg font-semibold"
-                    >
-                      Đóng
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <style>{`
+        .card { will-change: transform, opacity; }
+        @media (max-width: 768px) { .card { margin-inline: 0; } }
+      `}</style>
     </section>
   );
 }
