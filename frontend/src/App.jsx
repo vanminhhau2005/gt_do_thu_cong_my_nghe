@@ -2,14 +2,15 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
-import Hero from "./components/Hero";
+//import BackgroundSpacer from "./components/BackgroundSpacer";
 import Search from "./pages/Search";
 import Main from "./components/Main";
-// import Products from "./components/Products"; // bỏ comment nếu có file
+import Statistics from "./components/Statistics";
+import Products from "./components/Products";
 import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
 
-// placeholder components cho những route bạn liệt kê (thay bằng component thực tế nếu có)
+// placeholder components
 const Ceramics = () => <div className="p-8">Đồ Gốm (tạm)</div>;
 const Fashion = () => <div className="p-8">Thời Trang (tạm)</div>;
 const Bamboo = () => <div className="p-8">Đan Tre (tạm)</div>;
@@ -21,19 +22,24 @@ const Contact = () => <div className="p-8">Liên hệ (tạm)</div>;
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
       <Header />
+      {/*<BackgroundSpacer />*/}
 
-      <main style={{ paddingTop: "100px" }}>
+      <main style={{ margin: 0, padding: 0, marginTop: "var(--header-height, 0)" }}>
         <Routes>
-          <Route path="/" element={
-            <>
-              <Hero />
-              <Main />
-              <Testimonials />
-              <Footer />
-            </>
-          } />
+          <Route
+            path="/"
+            element={
+              <>
+                <Main />
+                <Statistics />
+                <Products />
+                <Testimonials />
+                <Footer />
+              </>
+            }
+          />
 
           <Route path="/search" element={<Search />} />
 

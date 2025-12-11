@@ -1,281 +1,156 @@
-// frontend/src/components/Header.jsx
-import React, { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import menuLogo from "../assets/menu.png";
+import React, { useState } from "react";
 
-export default function Header() {
-  const logoRef = useRef(null);
-  const leftNavRef = useRef([]);
-  const rightNavRef = useRef([]);
-  const topBarRef = useRef(null);
-  const headerRef = useRef(null);
-  const navWrapRef = useRef(null);
+// This file contains two components: Header and Main (hero).
+// TailwindCSS is used for styling. Place your hero image at: src/assets/hero.jpg
 
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [compact, setCompact] = useState(false);
-
-  const leftNav = [
-    { label: "Đồ Gốm", children: ["Strategy", "Family", "Party"], href: "/" },
-    { label: "Thời Trang", children: ["Đồ trang trí", "Đồ bếp", "Nội thất nhỏ"], href: "/nhacua" },
-    { label: "Đan Tre", children: ["Túi", "Trang sức", "Vật dụng"], href: "/phukien" },
-    { label: "Dụng Cụ", children: ["Nam", "Nữ", "Trẻ Em"], href: "/thoitrang" },
-  ];
-
-  const rightNav = [
-    { label: "Về chúng tôi", href: "/about" },
-    { label: "Cửa hàng", href: "/shop" },
-    { label: "Đối tác", href: "/partners" },
-    { label: "Liên hệ", href: "/contact" },
-  ];
-
-  // reset refs mỗi render
-  leftNavRef.current = [];
-  rightNavRef.current = [];
-
-  const goTo = (href) => {
-    if (!href) return;
-    window.location.href = href;
-  };
-
-  const slugify = (str) =>
-    String(str)
-      .normalize("NFKD")
-      .replace(/[\u0300-\u036F]/g, "")
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-");
-
-  const lines = [
-    "Một số đồ thủ công mỹ nghệ nổi bật",
-    "Khám phá các sản phẩm mới nhất",
-    "Thủ công mỹ nghệ Việt Nam, tinh xảo và độc đáo",
-    "Sản phẩm thủ công - Quà tặng ý nghĩa cho mọi dịp",
-  ];
-
-  useEffect(() => {
-    if (logoRef.current)
-      gsap.fromTo(
-        logoRef.current,
-        { opacity: 0, y: -6 },
-        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }
-      );
-
-    const leftEls = leftNavRef.current.filter(Boolean);
-    if (leftEls.length)
-      gsap.fromTo(
-        leftEls,
-        { y: 12, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: "power2.out" }
-      );
-
-    const topText = topBarRef.current;
-    if (topText) {
-      topText.style.display = "flex";
-      topText.style.alignItems = "center";
-      topText.style.justifyContent = "center";
-      topText.style.color = "#ffffff";
-      topText.style.fontSize = "13px";
-      topText.style.fontWeight = "600";
-      topText.style.fontStyle = "normal";
-      topText.style.letterSpacing = "0.2px";
-      topText.style.fontFamily =
-        'Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial';
-
-      let i = 0,
-        tid = null;
-      const tick = () => {
-        topText.textContent = lines[i];
-        tid = setTimeout(() => {
-          i = (i + 1) % lines.length;
-          tick();
-        }, 1800);
-      };
-      tick();
-      return () => clearTimeout(tid);
-    }
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY || window.pageYOffset;
-      setCompact(y > 50);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    if (!logoRef.current) return;
-    if (compact) {
-      gsap.to(logoRef.current, { width: 96, height: 96, duration: 0.22, ease: "power2.inOut" });
-    } else {
-      gsap.to(logoRef.current, { width: 144, height: 144, duration: 0.28, ease: "power2.out" });
-    }
-  }, [compact]);
-
-  useEffect(() => {
-    if (topBarRef.current) {
-      if (compact) {
-        gsap.to(topBarRef.current, { height: 0, opacity: 0, duration: 0.22, ease: "power2.inOut" });
-      } else {
-        gsap.to(topBarRef.current, { height: "7vh", opacity: 1, duration: 0.35, ease: "power2.out" });
-      }
-    }
-
-    if (headerRef.current) {
-      if (compact) {
-        gsap.to(headerRef.current, { height: 120, top: 0, duration: 0.28, ease: "power2.inOut" });
-      } else {
-        gsap.to(headerRef.current, { height: "20vh", top: "7vh", duration: 0.35, ease: "power2.out" });
-      }
-    }
-  }, [compact]);
-
-  const handleMouseEnterMenu = (el) => {
-    if (!el) return;
-    gsap.to(el, { scale: 1.03, color: "#ff7a00", duration: 0.12 });
-  };
-  const handleMouseLeaveMenu = (el) => {
-    if (!el) return;
-    gsap.to(el, { scale: 1, color: "#000000", duration: 0.12 });
-  };
-
-  const SearchSVG = ({ className }) => (
-    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="11" cy="11" r="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+export function Header() {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
-      {/* Top bar cam */}
-      <div
-        ref={topBarRef}
-        className="w-full bg-orange-700 text-white overflow-hidden"
-        style={{
-          height: compact ? 0 : "7vh",
-          transition: "height .25s ease",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div className="text-center cursor-default select-none" />
-      </div>
+    <header className="fixed top-0 left-0 w-full z-40">
+      <div className="backdrop-blur-sm bg-black/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Left: Logo + nav */}
+            <div className="flex items-center gap-6">
+              <a href="#" className="flex items-center gap-3">
+                <div className="text-white font-semibold text-xl">feane</div>
+              </a>
 
-      {/* Header trắng ngà, height 20% */}
-      <header
-        ref={headerRef}
-        className="w-full shadow-sm border-b border-gray-200 sticky z-40 overflow-visible"
-        style={{ backgroundColor: "#FFF8E7", top: compact ? 0 : "7vh", height: compact ? 120 : "20vh" }}
-      >
-        <div className="max-w-[1280px] mx-auto px-4 w-full flex items-center">
-          {/* LEFT */}
-          <div className="w-1/3 flex items-center">
-            {!compact && (
-              <nav className="hidden lg:flex items-center gap-6 ml-4">
-                {leftNav.map((item, idx) => (
-                  <div key={item.label} className="relative group cursor-pointer" ref={(el) => (leftNavRef.current[idx] = el)}>
-                    <button
-                      className="text-black font-semibold text-sm"
-                      onClick={() => goTo(item.href)}
-                      onMouseEnter={(e) => handleMouseEnterMenu(e.currentTarget)}
-                      onMouseLeave={(e) => handleMouseLeaveMenu(e.currentTarget)}
-                      aria-label={item.label}
-                    >
-                      {item.label}
-                    </button>
-                    {item.children && (
-                      <div className="absolute left-0 top-full mt-2 w-44 bg-[#FFF8E7] shadow-md rounded-md opacity-0 group-hover:opacity-100 transition z-50">
-                        {item.children.map((c) => (
-                          <a key={c} href={`${item.href}/${slugify(c)}`} className="block px-3 py-2 text-gray-700 hover:bg-gray-100 text-sm">
-                            {c}
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
+              <nav className="hidden md:flex items-center gap-6 text-sm">
+                <a href="#" className="text-gray-200 hover:text-white">HOME</a>
+                <a href="#" className="text-gray-300 hover:text-white">MENU</a>
+                <a href="#" className="text-gray-300 hover:text-white">ABOUT</a>
+                <a href="#" className="text-gray-300 hover:text-white">BOOK TABLE</a>
               </nav>
-            )}
-          </div>
-
-          {/* CENTER LOGO */}
-          <div className="w-1/3 flex justify-center items-center">
-            <div
-              ref={logoRef}
-              className="cursor-pointer z-50 flex items-center justify-center"
-              onClick={() => goTo("/")}
-              role="button"
-              aria-label="Go to home"
-              style={{ width: compact ? 96 : 144, height: compact ? 96 : 144 }}
-            >
-              <img src={menuLogo} alt="Logo" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
             </div>
-          </div>
 
-          {/* RIGHT */}
-          <div className="w-1/3 flex items-center justify-end gap-4">
-            {!compact && (
-              <div className="hidden lg:flex items-center gap-6">
-                {rightNav.map((r, idx) => (
-                  <a
-                    key={r.label}
-                    href={r.href}
-                    className="text-black text-sm font-medium cursor-pointer"
-                    ref={(el) => (rightNavRef.current[idx] = el)}
-                    onMouseEnter={(e) => handleMouseEnterMenu(e.currentTarget)}
-                    onMouseLeave={(e) => handleMouseLeaveMenu(e.currentTarget)}
-                  >
-                    {r.label}
-                  </a>
-                ))}
-                <a href="/search" className="hover:text-black" aria-label="Search">
-                  <SearchSVG className="w-6 h-6 text-black" />
-                </a>
+            {/* Right: Icons + CTA */}
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-4">
+                <button aria-label="account" className="text-gray-200 hover:text-white">
+                  {/* simple user icon */}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 10a4 4 0 100-8 4 4 0 000 8z" />
+                    <path fillRule="evenodd" d="M.458 16.042A8 8 0 0116.042.458 8 8 0 01.458 16.042z" clipRule="evenodd" />
+                  </svg>
+                </button>
+                <button aria-label="cart" className="text-gray-200 hover:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                  </svg>
+                </button>
               </div>
-            )}
-            <button className="lg:hidden text-2xl cursor-pointer p-2" onClick={() => setMobileOpen((v) => !v)} aria-label="Toggle menu">
-              {mobileOpen ? "✖" : "☰"}
-            </button>
+
+              <a href="#order" className="hidden md:inline-block px-4 py-2 rounded-full bg-yellow-400 text-black font-medium">Order Online</a>
+
+              {/* Mobile menu button */}
+              <button className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-200" onClick={() => setOpen(!open)}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={open ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* navWrap */}
-        <div
-          ref={navWrapRef}
-          className="w-full overflow-hidden transition-all duration-300"
-          style={{ maxHeight: !compact || mobileOpen ? 500 : 0, opacity: !compact || mobileOpen ? 1 : 0 }}
-        >
-          <div className="max-w-[1280px] mx-auto px-4 py-2" />
-        </div>
-
-        {/* Mobile menu */}
-        {mobileOpen && (
-          <div className="lg:hidden absolute top-full left-0 w-full bg-[#FFF8E7] shadow-md z-30 flex flex-col items-start px-4 py-4">
-            {leftNav.map((item) => (
-              <div key={item.label} className="w-full mb-2">
-                <a href={item.href} className="block text-gray-800 font-medium py-2">{item.label}</a>
-                {item.children && (
-                  <div className="pl-4">
-                    {item.children.map((c) => (
-                      <a key={c} href={`${item.href}/${slugify(c)}`} className="block text-gray-600 py-1 text-sm">{c}</a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            <div className="border-t mt-2 pt-2 w-full border-gray-300">
-              {rightNav.map((r) => (
-                <a key={r.label} href={r.href} className="block text-gray-800 font-medium py-2">{r.label}</a>
-              ))}
-            </div>
+        {/* Mobile menu panel */}
+        {open && (
+          <div className="md:hidden px-4 pb-4">
+            <nav className="flex flex-col gap-3 text-sm">
+              <a href="#" className="text-gray-200">HOME</a>
+              <a href="#" className="text-gray-200">MENU</a>
+              <a href="#" className="text-gray-200">ABOUT</a>
+              <a href="#" className="text-gray-200">BOOK TABLE</a>
+              <a href="#order" className="mt-2 inline-block px-4 py-2 rounded-full bg-yellow-400 text-black font-medium">Order Online</a>
+            </nav>
           </div>
         )}
-      </header>
+      </div>
+    </header>
+  );
+}
+
+export function MainHero({ image = "src/assets/hero.jpg" }) {
+  return (
+    <main className="min-h-screen relative overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-center bg-cover"
+        style={{ backgroundImage: `url(${image})` }}
+        aria-hidden
+      />
+
+      {/* Dark overlay on left to make text readable */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          {/* Left: Headline and CTA */}
+          <div className="text-left text-white max-w-lg">
+            <h1 className="font-script text-5xl sm:text-6xl leading-tight mb-4">Fast Food Restaurant</h1>
+            <p className="text-gray-300 mb-8">Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsum.</p>
+
+            <div className="flex items-center gap-4">
+              <a href="#order" className="inline-block px-5 py-3 rounded-full bg-yellow-400 font-medium text-black">Order Now</a>
+
+              {/* small bullets (carousel indicators) */}
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-yellow-400" />
+                <span className="w-3 h-3 rounded-full bg-white/30" />
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Image area with play overlay and side circular buttons */}
+          <div className="flex justify-center md:justify-end items-center relative">
+            {/* The product image is actually the background; we add a centered translucent play button */}
+            <div className="relative w-full max-w-xl">
+              <div className="mx-auto aspect-[16/9] rounded-lg overflow-hidden shadow-2xl ring-1 ring-black/40">
+                {/* Transparent layer to create the circular play control visuals */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  {/* Left circular small control */}
+                  <div className="absolute left-12 sm:left-20 w-20 h-20 rounded-full bg-black/50 flex items-center justify-center shadow-lg">
+                    <div className="text-white font-semibold">5</div>
+                  </div>
+
+                  {/* Center play */}
+                  <div className="w-28 h-28 rounded-full bg-black/45 flex items-center justify-center shadow-2xl">
+                    <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v18l15-9L5 3z" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Right circular small control */}
+                  <div className="absolute right-12 sm:right-20 w-20 h-20 rounded-full bg-black/50 flex items-center justify-center shadow-lg">
+                    <div className="text-white font-semibold">5</div>
+                  </div>
+                </div>
+
+                {/* This empty div keeps aspect ratio so the background shows through */}
+                <div className="w-full h-full" />
+              </div>
+
+              {/* caption under image on small screens */}
+              <div className="mt-4 text-gray-200 text-sm text-center md:text-right">Delicious burger & fries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default function App() {
+  // If you're using a bundler, replace image path with an imported asset: import hero from './assets/hero.jpg'
+  const heroPath = "src/assets/hero.jpg"; // edit to match your project
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      <MainHero image={heroPath} />
     </div>
   );
 }
