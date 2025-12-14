@@ -13,15 +13,22 @@ const importData = async () => {
     await connectDB();
 
     console.log("🗑️ Clearing old products...");
-    await Product.deleteMany();
+    await Product.deleteMany({});
 
     console.log("📦 Importing new products...");
-    await Product.insertMany(products);
+    // ordered: false -> tiếp tục chèn nếu gặp duplicate key
+    await Product.insertMany(products, { ordered: false });
 
     console.log('✅ Data Imported Successfully!');
-    process.exit();
+    await mongoose.disconnect();
+    process.exit(0);
   } catch (error) {
-    console.error(`❌ Error importing data: ${error.message}`);
+    console.error('❌ Error importing data:', error);
+    try {
+      await mongoose.disconnect();
+    } catch (e) {
+      // ignore
+    }
     process.exit(1);
   }
 };
@@ -32,18 +39,24 @@ const destroyData = async () => {
     await connectDB();
 
     console.log("🗑️ Destroying all products...");
-    await Product.deleteMany();
+    await Product.deleteMany({});
 
     console.log('🗑️ Data Destroyed Successfully!');
-    process.exit();
+    await mongoose.disconnect();
+    process.exit(0);
   } catch (error) {
-    console.error(`❌ Error destroying data: ${error.message}`);
+    console.error('❌ Error destroying data:', error);
+    try {
+      await mongoose.disconnect();
+    } catch (e) {
+      // ignore
+    }
     process.exit(1);
   }
 };
 
-// Chạy seeder: node seeder.js -d (xoá) hoặc node seeder.js (import)
-if (process.argv[2] === '-d') {
+// CLI: node seeder.js -d  (destroy)   or   node seeder.js  (import)
+if (process.argv.includes('-d')) {
   destroyData();
 } else {
   importData();

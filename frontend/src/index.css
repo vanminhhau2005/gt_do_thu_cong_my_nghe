@@ -2,9 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles */
+/* Custom styles (theme) */
+:root {
+  --page-bg: #f8fafc; /* slate-50 */
+  --surface-bg: #ffffff;
+  --surface-border: rgba(15, 23, 42, 0.12); /* slate-900 @ 12% */
+  --text: #0f172a; /* slate-900 */
+  --muted: #475569; /* slate-600 */
+  --accent: #65a30d; /* lime-600 */
+  --accent-2: #4d7c0f; /* lime-700 */
+  --header-height: 109px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'Inter', sans-serif;
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 

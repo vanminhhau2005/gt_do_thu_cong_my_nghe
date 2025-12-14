@@ -1,53 +1,104 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+export default function Main() {
+	const image = "src/assets/anhnen006.png";
+	const rootRef = useRef(null);
+	const bannerTextRef = useRef(null);
+	const introTextRef = useRef(null);
 
-export default function Header() {
-  const [open, setOpen] = useState(false);
+	useEffect(() => {
+		if (!rootRef.current) return;
+		const ctx = gsap.context(() => {
+			const bannerTargets = bannerTextRef.current
+				? Array.from(bannerTextRef.current.querySelectorAll("[data-anim='text']"))
+				: [];
+			const introTargets = introTextRef.current
+				? Array.from(introTextRef.current.querySelectorAll("[data-anim='text']"))
+				: [];
 
-  return (
-    <header className="fixed top-0 left-0 w-full z-40">
-      <div className="backdrop-blur-sm bg-black/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-6">
-              <div className="text-white font-semibold text-xl">feane</div>
+			gsap.from([...bannerTargets], {
+				opacity: 0,
+				x: -28,
+				y: 8,
+				duration: 0.9,
+				ease: "power3.out",
+				stagger: 0.12,
+			});
 
-              <nav className="hidden md:flex items-center gap-6 text-sm">
-                <a href="#" className="text-gray-200 hover:text-white">HOME</a>
-                <a href="#" className="text-gray-300 hover:text-white">MENU</a>
-                <a href="#" className="text-gray-300 hover:text-white">ABOUT</a>
-                <a href="#" className="text-gray-300 hover:text-white">BOOK TABLE</a>
-              </nav>
-            </div>
+			gsap.from([...introTargets], {
+				opacity: 0,
+				y: 16,
+				duration: 0.8,
+				ease: "power3.out",
+				stagger: 0.1,
+				delay: 0.1,
+			});
+		}, rootRef);
+		return () => ctx.revert();
+	}, []);
 
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-4">
-                <button className="text-gray-200 hover:text-white">👤</button>
-                <button className="text-gray-200 hover:text-white">🛒</button>
-              </div>
+	return (
+		<main ref={rootRef} id="main" className="relative overflow-hidden bg-[var(--page-bg)] text-lime-700">
+			<div className="absolute inset-0 bg-gradient-to-br from-white via-lime-50/60 to-slate-50" />
+			<div
+				className="absolute inset-0 opacity-40"
+				style={{
+					backgroundImage:
+						"radial-gradient(circle at 20% 0%, rgba(4,120,87,0.10), transparent 45%), radial-gradient(circle at 80% 100%, rgba(15,23,42,0.06), transparent 50%)",
+				}}
+			/>
 
-              <a href="#order" className="hidden md:inline-block px-4 py-2 rounded-full bg-yellow-400 text-black font-medium">Order Online</a>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "Store",
+						name: "Thủ Công Mỹ Nghệ Việt Nam",
+						description:
+							"Giới thiệu sản phẩm thủ công mỹ nghệ Việt Nam — gốm sứ, tre mây, dệt may và nhiều chất liệu truyền thống.",
+						url: "/",
+					}),
+				}}
+			/>
 
-              <button className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-200" onClick={() => setOpen(!open)}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={open ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
+			<div className="relative z-10 w-full">
+				{/* Banner dính sát dưới header */}
+				<div className="w-full">
+					<div className="relative w-full h-[568px]">
+						<img
+							src={image}
+							alt="Banner"
+							loading="lazy"
+							className="h-full w-full object-cover"
+						/>
+						<div className="pointer-events-none absolute inset-0">
+							<div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8">
+								<div className="h-full flex items-center">
+									<div ref={bannerTextRef} className="max-w-xl">
+										<h2 data-anim="text" className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] text-lime-700 drop-shadow-2xl">
+											Đồ thủ công mỹ nghệ
+											<span className="block text-lime-700 drop-shadow-2xl">đậm bản sắc Việt Nam</span>
+										</h2>
+										<p data-anim="text" className="mt-4 text-sm sm:text-base text-lime-700 leading-relaxed max-w-lg drop-shadow-2xl">
+											Chất liệu tự nhiên, chế tác tỉ mỉ, phù hợp trang trí và quà tặng.
+										</p>
+										<p data-anim="text" className="mt-2 text-sm sm:text-base text-lime-700 leading-relaxed max-w-lg drop-shadow-2xl">
+											Mỗi sản phẩm là một câu chuyện của làng nghề, được hoàn thiện bằng đôi tay khéo léo.
+										</p>
+										<p data-anim="text" className="mt-2 text-sm sm:text-base text-lime-700 leading-relaxed max-w-lg drop-shadow-2xl">
+											Thiết kế mộc mạc, tinh tế — phù hợp không gian sống hiện đại và truyền thống.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        {open && (
-          <div className="md:hidden px-4 pb-4">
-            <nav className="flex flex-col gap-3 text-sm text-gray-200">
-              <a href="#">HOME</a>
-              <a href="#">MENU</a>
-              <a href="#">ABOUT</a>
-              <a href="#">BOOK TABLE</a>
-              <a href="#order" className="mt-2 inline-block px-4 py-2 rounded-full bg-yellow-400 text-black font-medium">Order Online</a>
-            </nav>
-          </div>
-        )}
-      </div>
-    </header>
-  );
+
+			</div>
+		</main>
+	);
 }

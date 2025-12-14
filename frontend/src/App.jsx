@@ -1,38 +1,76 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
-//import BackgroundSpacer from "./components/BackgroundSpacer";
 import Search from "./pages/Search";
+import ProductDetail from "./pages/ProductDetail";
+import LienHe from "./pages/LienHe";
+import GioiThieu from "./pages/GioiThieu";
 import Main from "./components/Main";
+import Categories from "./components/Categories";
+import WhyChoose from "./components/WhyChoose";
 import Statistics from "./components/Statistics";
 import Products from "./components/Products";
 import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
-
-// placeholder components
-const Ceramics = () => <div className="p-8">Đồ Gốm (tạm)</div>;
-const Fashion = () => <div className="p-8">Thời Trang (tạm)</div>;
-const Bamboo = () => <div className="p-8">Đan Tre (tạm)</div>;
-const Tool = () => <div className="p-8">Dụng Cụ (tạm)</div>;
-const About = () => <div className="p-8">Về chúng tôi (tạm)</div>;
-const Store = () => <div className="p-8">Cửa hàng (tạm)</div>;
-const Partner = () => <div className="p-8">Đối tác (tạm)</div>;
-const Contact = () => <div className="p-8">Liên hệ (tạm)</div>;
+import Collection from "./pages/Collection";
 
 export default function App() {
-  return (
-    <div className="min-h-screen bg-white" style={{ margin: 0, padding: 0 }}>
-      <Header />
-      {/*<BackgroundSpacer />*/}
+  const location = useLocation();
 
-      <main style={{ margin: 0, padding: 0, marginTop: "var(--header-height, 0)" }}>
+  useEffect(() => {
+    const hash = location?.hash;
+    if (!hash) return;
+
+    const id = hash.replace("#", "");
+    if (!id) return;
+
+    const timeout = window.setTimeout(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const headerOffset = (() => {
+        try {
+          const raw = window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue("--header-height")
+            .trim();
+          const parsed = Number.parseFloat(raw);
+          return Number.isFinite(parsed) ? parsed : 96;
+        } catch {
+          return 96;
+        }
+      })();
+      const rect = el.getBoundingClientRect();
+      const top = rect.top + window.scrollY - headerOffset;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
+  }, [location]);
+
+  return (
+    <div className="min-h-screen bg-[var(--page-bg)] text-[var(--text)] m-0 p-0">
+      {/* HEADER */}
+      <Header />
+
+      {/* MAIN CONTENT */}
+      <main
+        style={{
+          margin: 0,
+          padding: 0,
+          marginTop: "var(--header-height, 0)", // tránh bị Header che
+        }}
+      >
         <Routes>
+          {/* HOME PAGE */}
           <Route
             path="/"
             element={
               <>
                 <Main />
+                <Categories />
+                <WhyChoose />
                 <Statistics />
                 <Products />
                 <Testimonials />
@@ -41,22 +79,29 @@ export default function App() {
             }
           />
 
+          {/* ABOUT PAGE */}
+          <Route path="/gt" element={<GioiThieu />} />
+
+          {/* SEARCH PAGE */}
           <Route path="/search" element={<Search />} />
 
-          {/* category pages */}
-          <Route path="/boardgames/*" element={<Ceramics />} />
-          <Route path="/nhacua/*" element={<Fashion />} />
-          <Route path="/phukien/*" element={<Bamboo />} />
-          <Route path="/thoitrang/*" element={<Tool />} />
+          {/* COLLECTION PAGE */}
+          <Route path="/collection" element={<Collection />} />
 
-          {/* other pages */}
-          <Route path="/about" element={<About />} />
-          <Route path="/shop" element={<Store />} />
-          <Route path="/partners" element={<Partner />} />
-          <Route path="/contact" element={<Contact />} />
+          {/* CONTACT PAGE */}
+          <Route path="/lienhe" element={<LienHe />} />
 
-          {/* fallback */}
-          <Route path="*" element={<div className="p-8">Trang không tìm thấy</div>} />
+          {/* BACKWARD COMPAT */}
+          <Route path="/news" element={<Navigate to="/lienhe" replace />} />
+
+          {/* PRODUCT DETAIL PAGE */}
+          <Route path="/products/:id" element={<ProductDetail />} />
+
+          {/* FALLBACK PAGE */}
+          <Route
+            path="*"
+            element={<div className="p-8 text-center text-xl">Trang không tìm thấy</div>}
+          />
         </Routes>
       </main>
     </div>
