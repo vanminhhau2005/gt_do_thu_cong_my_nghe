@@ -10,19 +10,26 @@ export default function GioiThieu() {
 				<header className="text-center">
 					<p className="text-xs uppercase tracking-[0.5em] text-lime-700">Giới thiệu</p>
 					<h1 className="mt-4 text-4xl md:text-5xl font-extrabold leading-tight text-lime-700">
-						MỸ NGHỆ CÁT ĐẰNG
+						GIỚI THIỆU SẢN PHẨM ĐỒ THỦ CÔNG MỸ NGHỆ VIỆT NAM
 					</h1>
 					<p className="mt-3 text-sm sm:text-base font-semibold text-lime-700 uppercase tracking-[0.2em]">
-						SẢN XUẤT VÀ CUNG CẤP SẢN PHẨM MỸ NGHỆ TỪ CHẮP NỨA, LUỒNG ÉP
+						Đồ thủ công mỹ nghệ Việt Nam là sự kết tinh tinh hoa văn hóa truyền thống cùng bàn tay khéo léo của những người thợ lành nghề, mang đậm bản sắc dân tộc và giá trị nghệ thuật bền vững theo thời gian.
 					</p>
 				</header>
 
 				<div className="mt-10 max-w-4xl mx-auto space-y-5 text-slate-700 leading-relaxed">
 					<p>
-						Công ty TNHH Sản Xuất Mỹ Nghệ Xuất Khẩu Cát Đằng được thành lập năm 1998 trên cơ sở làng nghề thủ công mỹ nghệ Cát Đằng với mục tiêu phát triển mở rộng thị trường xuất khẩu, góp phần tạo công ăn việc làm cho lao động ở nông thôn, chung tay xóa đói giảm nghèo cho các khu vực lân cận khu vực các xã của huyện Ý Yên, Nam Định.
+						Các sản phẩm được sản xuất chủ yếu từ nguyên liệu tự nhiên như tre, nứa, mây, luồng ép, đất gốm, giấy thủ công, thân thiện với môi trường và an toàn cho người sử dụng. Mỗi sản phẩm đều trải qua quy trình sản xuất tỉ mỉ, kết hợp giữa kỹ thuật thủ công truyền thống và tiêu chuẩn chất lượng hiện đại, đảm bảo độ bền, tính thẩm mỹ và giá trị sử dụng cao.
 					</p>
 					<p>
-						Trước đây, người ta vẫn thấy hàng sơn mài chỉ được làm trên những tấm gỗ đã được chọn lựa rất kỹ, thì nay, Công ty TNHH SX Mỹ Nghệ XK Cát Đằng đã sáng tạo thêm những sản phẩm từ việc chắp nứa rồi đem sơn mài. So với gỗ, loại mặt hàng này vừa nhẹ, giá rẻ hơn, màu sắc và kiểu dáng đa dạng, chất lượng đảm bảo, thu hút được nhiều khách hàng và chủ yếu để xuất khẩu đi nhiều nước trên thế giới.
+						Chúng tôi sản xuất và cung cấp đa dạng các mặt hàng thủ công mỹ nghệ, bao gồm:
+sản phẩm tre mây đan, đồ gốm mỹ nghệ, quạt giấy truyền thống, lồng đèn thủ công, sản phẩm đan tre, cùng nhiều mặt hàng trang trí và gia dụng khác như bình lọ, bát đĩa, khay, chậu trồng cây, đồ dùng văn phòng và đồ trang trí nội thất.
+					</p>
+					<p>
+						Với ưu thế mẫu mã phong phú, chất lượng ổn định, thân thiện với môi trường, các sản phẩm đồ thủ công mỹ nghệ Việt Nam đáp ứng nhu cầu ngày càng cao của thị trường trong nước và xuất khẩu, vượt qua các tiêu chuẩn khắt khe của nhiều quốc gia, từ đó xây dựng được uy tín và mối quan hệ hợp tác lâu dài với đối tác.
+					</p>
+					<p>
+						Hãy liên hệ với chúng tôi ngay hôm nay để được tư vấn, giới thiệu sản phẩm và hợp tác cung cấp đồ thủ công mỹ nghệ Việt Nam chất lượng cao.
 					</p>
 
 					<div className="my-8 max-w-5xl mx-auto overflow-hidden rounded-3xl">

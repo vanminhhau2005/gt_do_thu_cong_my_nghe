@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="2800" viewBox="0 0 1400 2800">
+  <rect x="0" y="0" width="1400" height="2800" fill="#ffffff" />
+
+  <!-- Header -->
+  <text x="40" y="48" font-family="Consolas, 'Courier New', monospace" font-size="20" font-weight="700" fill="#0f172a">GT Craftshop – Project Sitemap (Workspace Files)</text>
+  <text x="40" y="74" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#334155">Generated from VS Code workspace (excluding node_modules/dist/.git). Total files: 117</text>
+
+  <!-- Columns -->
+  <rect x="30" y="95" width="660" height="2675" fill="#f8fafc" stroke="#e2e8f0" />
+  <rect x="710" y="95" width="660" height="2675" fill="#f8fafc" stroke="#e2e8f0" />
+  <line x1="700" y1="95" x2="700" y2="2770" stroke="#e2e8f0" />
+
+  <!-- Left: Tree -->
+  <text x="50" y="130" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="700" fill="#0f172a">FILE TREE</text>
+  <text x="50" y="154" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#0f172a" xml:space="preserve">
+    <tspan x="50" dy="0">.</tspan>
+    <tspan x="50" dy="16">├─ PROJECT_STRUCTURE.md</tspan>
+    <tspan x="50" dy="16">├─ backend</tspan>
+    <tspan x="50" dy="16">│  ├─ .env</tspan>
+    <tspan x="50" dy="16">│  ├─ config</tspan>
+    <tspan x="50" dy="16">│  │  └─ db.js</tspan>
+    <tspan x="50" dy="16">│  ├─ controllers</tspan>
+    <tspan x="50" dy="16">│  │  └─ productController.js</tspan>
+    <tspan x="50" dy="16">│  ├─ data</tspan>
+    <tspan x="50" dy="16">│  │  └─ products.js</tspan>
+    <tspan x="50" dy="16">│  ├─ models</tspan>
+    <tspan x="50" dy="16">│  │  └─ Product.js</tspan>
+    <tspan x="50" dy="16">│  ├─ package-lock.json</tspan>
+    <tspan x="50" dy="16">│  ├─ package.json</tspan>
+    <tspan x="50" dy="16">│  ├─ routes</tspan>
+    <tspan x="50" dy="16">│  │  ├─ contactRoutes.js</tspan>
+    <tspan x="50" dy="16">│  │  └─ productRoutes.js</tspan>
+    <tspan x="50" dy="16">│  ├─ seeder.js</tspan>
+    <tspan x="50" dy="16">│  └─ server.js</tspan>
+    <tspan x="50" dy="16">└─ frontend</tspan>
+    <tspan x="50" dy="16">   ├─ .gitignore</tspan>
+    <tspan x="50" dy="16">   ├─ README.md</tspan>
+    <tspan x="50" dy="16">   ├─ eslint.config.js</tspan>
+    <tspan x="50" dy="16">   ├─ index.html</tspan>
+    <tspan x="50" dy="16">   ├─ package-lock.json</tspan>
+    <tspan x="50" dy="16">   ├─ package.json</tspan>
+    <tspan x="50" dy="16">   ├─ postcss.config.cjs</tspan>
+    <tspan x="50" dy="16">   ├─ public</tspan>
+    <tspan x="50" dy="16">   │  └─ vite.svg</tspan>
+    <tspan x="50" dy="16">   ├─ src</tspan>
+    <tspan x="50" dy="16">   │  ├─ App.css</tspan>
+    <tspan x="50" dy="16">   │  ├─ App.jsx</tspan>
+    <tspan x="50" dy="16">   │  ├─ index.css</tspan>
+    <tspan x="50" dy="16">   │  ├─ main.jsx</tspan>
+    <tspan x="50" dy="16">   │  ├─ assets</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A0.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A01.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A02.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A03.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A1.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A1000.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A12.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A13.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A14.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A15.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A16.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A17.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A18.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A19.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A2.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A20.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A21.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A22.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A3.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A4.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A5.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ A6.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ AN.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ DANTREMAY.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ DENGIAY.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ DENGIAYQ.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ DOGOM.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ Slide 4.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ X3.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh1.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh10.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh2.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh3.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh4.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh5.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh6.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh7.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh8.jpeg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh9(1)(1).png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anh9.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhProducts.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen001.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen002.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen003.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen004.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen005.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen006.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen007.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen008.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen009.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen009.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen10.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen11.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen12.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen13.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen@.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen@.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnen@@.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnenA.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnenA11.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnenB.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnenC.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnenD.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnenj.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhnenoo.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ anhtre1.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ cc.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ lo_go.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ logo.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ logo1.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ may tre.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ maytre.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ menu.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ name.png</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ nen1.jpg</tspan>
+    <tspan x="50" dy="16">   │  │  └─ non.png</tspan>
+    <tspan x="50" dy="16">   │  ├─ components</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ AboutSection.jsx</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ Categories.jsx</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ DecorProducts.jsx</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ Footer.jsx</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ Header.jsx</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ HomeHero.jsx</tspan>
+    <tspan x="50" dy="16">   │  │  ├─ KitchenProducts.jsx</tspan>
+    <tspan x="50" dy="16">   │  │  └─ OfficeProducts.jsx</tspan>
+    <tspan x="50" dy="16">   │  └─ pages</tspan>
+    <tspan x="50" dy="16">   │     ├─ Collection.jsx</tspan>
+    <tspan x="50" dy="16">   │     ├─ GioiThieu.jsx</tspan>
+    <tspan x="50" dy="16">   │     ├─ LienHe.jsx</tspan>
+    <tspan x="50" dy="16">   │     ├─ News.jsx</tspan>
+    <tspan x="50" dy="16">   │     ├─ ProductDetail.jsx</tspan>
+    <tspan x="50" dy="16">   │     └─ Search.jsx</tspan>
+    <tspan x="50" dy="16">   ├─ tailwind.config.cjs</tspan>
+    <tspan x="50" dy="16">   └─ vite.config.js</tspan>
+  </text>
+
+  <!-- Right: Notes -->
+  <text x="730" y="130" font-family="Consolas, 'Courier New', monospace" font-size="14" font-weight="700" fill="#0f172a">FUNCTION NOTES</text>
+  <text x="730" y="154" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#0f172a" xml:space="preserve">
+    <tspan x="730" dy="0">Backend (Express + MongoDB)</tspan>
+    <tspan x="730" dy="16">- server.js: chạy server, mount routes /api/*</tspan>
+    <tspan x="730" dy="16">- config/db.js: kết nối MongoDB (mongoose)</tspan>
+    <tspan x="730" dy="16">- models/Product.js: schema sản phẩm</tspan>
+    <tspan x="730" dy="16">- routes/productRoutes.js: /api/products</tspan>
+    <tspan x="730" dy="16">- routes/contactRoutes.js: /api/contact (gửi email)</tspan>
+    <tspan x="730" dy="16">- seeder.js + data/products.js: seed dữ liệu mẫu</tspan>
+
+    <tspan x="730" dy="28">Frontend (React + Vite + Tailwind)</tspan>
+    <tspan x="730" dy="16">- src/main.jsx: mount React App</tspan>
+    <tspan x="730" dy="16">- src/App.jsx: Router + điều hướng</tspan>
+    <tspan x="730" dy="16">- components/*: Header/Footer + các section trang chủ</tspan>
+    <tspan x="730" dy="16">- pages/*: các trang theo route</tspan>
+
+    <tspan x="730" dy="28">Routes chính (từ App.jsx)</tspan>
+    <tspan x="730" dy="16">- / : Trang chủ</tspan>
+    <tspan x="730" dy="16">- /gioi-thieu : Giới thiệu (có redirect /gt)</tspan>
+    <tspan x="730" dy="16">- /collection : Bộ sưu tập</tspan>
+    <tspan x="730" dy="16">- /search : Tìm kiếm</tspan>
+    <tspan x="730" dy="16">- /products/:id : Chi tiết sản phẩm</tspan>
+    <tspan x="730" dy="16">- /lienhe : Liên hệ (có redirect /news)</tspan>
+
+    <tspan x="730" dy="28">Liên hệ gửi email</tspan>
+    <tspan x="730" dy="16">- Frontend: pages/LienHe.jsx gọi POST /api/contact</tspan>
+    <tspan x="730" dy="16">- Backend: routes/contactRoutes.js dùng SMTP (Nodemailer)</tspan>
+    <tspan x="730" dy="16">- Env: backend/.env (SMTP_USER, SMTP_PASS, CONTACT_TO)</tspan>
+  </text>
+</svg>

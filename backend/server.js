@@ -5,14 +5,15 @@ import cors from "cors";
 import morgan from "morgan"; // lightweight logger
 import connectDB from "./config/db.js";
 import productRoutes from './routes/productRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 
-dotenv.config(); // load .env early
+dotenv.config({ override: true }); // load .env early (override shell env to avoid stale values)
 
 // Quick debug for env
 if (!process.env.MONGO_URI) {
   console.warn("⚠️  MONGO_URI is not set in .env");
 } else {
-  console.log("DEBUG: MONGO_URI =", process.env.MONGO_URI);
+  console.log("✅ MONGO_URI is set");
 }
 
 const app = express();
@@ -29,6 +30,7 @@ if (process.env.NODE_ENV !== "production") {
 // --- Mount API routes BEFORE serving any static SPA build ---
 // This avoids returning index.html for API paths (the cause of "Unexpected token '<'...")
 app.use('/api/products', productRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Test route (optional)
 app.get('/', (req, res) => {

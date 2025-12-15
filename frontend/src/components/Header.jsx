@@ -9,8 +9,8 @@ export default function Header() {
   const pathname = location?.pathname || "/";
   const hash = location?.hash || "";
   const isHomeActive = pathname === "/" && !hash;
-  const isIntroActive = pathname === "/gt" || (pathname === "/" && hash === "#main");
-  const isContactActive = pathname === "/" && hash === "#contact";
+  const isIntroActive = pathname === "/gioi-thieu" || pathname === "/gt" || (pathname === "/" && hash === "#main");
+  const isContactActive = pathname === "/lienhe" || (pathname === "/" && hash === "#contact");
   const isProductsActive = pathname === "/collection" || pathname.startsWith("/products/");
   const [productsOpen, setProductsOpen] = useState(false);
   const productsMenuRef = useRef(null);
@@ -82,7 +82,7 @@ export default function Header() {
                   <path d="M2.25 6.75A3.75 3.75 0 016 3h12a3.75 3.75 0 013.75 3.75v10.5A3.75 3.75 0 0118 21H6a3.75 3.75 0 01-3.75-3.75V6.75zm3.3-.75a2.25 2.25 0 00-1.99 1.2l7.63 5.09a1.5 1.5 0 001.66 0l7.63-5.09A2.25 2.25 0 0018.45 6H5.55zm15.2 3.03l-6.54 4.36a3 3 0 01-3.32 0L4.35 9.03v8.22A2.25 2.25 0 006.6 19.5h10.8a2.25 2.25 0 002.25-2.25V9.03z" />
                 </svg>
                 <span className="uppercase tracking-[0.12em]">Email:</span>
-                <span className="font-medium">mynghe_catdang@yahoo.com.vn</span>
+                <span className="font-medium">mynghe@gmail.com</span>
               </a>
 
               <span className="hidden sm:inline-block h-4 w-px bg-white/50" />
@@ -101,7 +101,7 @@ export default function Header() {
                   <path d="M1.5 4.5A3 3 0 014.5 1.5h1.372a1.5 1.5 0 011.415 1.01l1.06 3.183a1.5 1.5 0 01-.633 1.716l-1.2.8a11.25 11.25 0 005.232 5.232l.8-1.2a1.5 1.5 0 011.716-.633l3.183 1.06a1.5 1.5 0 011.01 1.415V19.5a3 3 0 01-3 3h-.75C7.127 22.5 1.5 16.873 1.5 9.75V4.5z" />
                 </svg>
                 <span className="uppercase tracking-[0.12em]">Hotline:</span>
-                <span className="font-semibold">0977 390 922</span>
+                <span className="font-semibold">0123 456 789</span>
               </a>
             </div>
             <div className="hidden lg:flex items-center gap-6 text-xs">
@@ -140,7 +140,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-[77px]">
             <div className="flex items-center gap-6">
               <div className="text-slate-900 font-semibold text-xl tracking-wide transform transition hover:scale-105">
-                GT Craft
+                GT Đồ thủ Công Mỹ Nghệ
               </div>
 
               {/* nav removed from here */}
@@ -157,7 +157,7 @@ export default function Header() {
                 />
               </Link>
 
-              <Link to="/gt" className="group">
+              <Link to="/gioi-thieu" className="group">
                 <span className="text-slate-800 transition-colors duration-200 hover:text-[var(--accent)]">GIỚI THIỆU</span>
                 <span
                   className={`block h-[2px] bg-lime-600 transition-transform origin-left mt-1 ${
@@ -260,7 +260,7 @@ export default function Header() {
                   </div>
                 )}
               </div>
-              <Link to="/#contact" className="group">
+              <Link to="/lienhe" className="group">
                 <span className="text-slate-800 transition-colors duration-200 hover:text-[var(--accent)]">LIÊN HỆ</span>
                 <span
                   className={`block h-[2px] bg-lime-600 transition-transform origin-left mt-1 ${
@@ -336,7 +336,7 @@ export default function Header() {
               ĐỒ THỦ CÔNG MỸ NGHỆ
             </Link>
             <Link
-              to="/#contact"
+              to="/lienhe"
               onClick={() => setOpen(false)}
               className={`transition duration-200 hover:text-[var(--accent)] ${
                 isContactActive ? "border-l-2 border-lime-600 pl-3" : ""

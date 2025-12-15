@@ -6,25 +6,25 @@ const CATEGORY_CARDS = [
 		id: "gom",
 		title: "ĐỒ GỐM",
 		query: "gốm",
-		image: "src/assets/anhnen006.png",
+		image: "src/assets/A01.JPG",
 	},
 	{
-		id: "tre",
-		title: "ĐAN TRE",
-		query: "tre",
-		image: "src/assets/anhnen008.png",
+		id: "tre may",
+		title: "ĐAN TRE MÂY",
+		query: "tre mây",
+		image: "src/assets/DANTREMAY.png",
 	},
 	{
 		id: "giay",
 		title: "GIẤY",
 		query: "giấy",
-		image: "src/assets/anhnen007.png",
+		image: "src/assets/DENGIAYQ.JPG",
 	},
 	{
 		id: "khac",
 		title: "KHÁC",
 		query: "",
-		image: "src/assets/anhnen009.jpg",
+		image: "src/assets/X3.PNG",
 	},
 ];
 
@@ -35,10 +35,10 @@ export default function Categories() {
 				<div className="p-6 md:p-8">
 					<div className="text-center">
 						<p className="text-xs uppercase tracking-[0.45em] text-lime-700">Danh mục</p>
-						<h2 className="mt-3 text-3xl md:text-4xl font-semibold text-lime-700">
-							Khám phá theo nhóm sản phẩm
+						<h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-extrabold text-lime-700">
+							KHÁM PHÁ SẢN PHẨM THEO CHẤT LIỆU
 						</h2>
-						<p className="mt-3 text-slate-600 max-w-2xl mx-auto">
+						<p className="mt-3 text-sm sm:text-base uppercase tracking-[0.25em] text-lime-700 max-w-2xl mx-auto">
 							Chọn danh mục để xem nhanh các sản phẩm cùng chất liệu/phong cách.
 						</p>
 					</div>

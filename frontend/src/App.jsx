@@ -6,12 +6,12 @@ import Search from "./pages/Search";
 import ProductDetail from "./pages/ProductDetail";
 import LienHe from "./pages/LienHe";
 import GioiThieu from "./pages/GioiThieu";
-import Main from "./components/Main";
+import HomeHero from "./components/HomeHero";
 import Categories from "./components/Categories";
-import WhyChoose from "./components/WhyChoose";
-import Statistics from "./components/Statistics";
-import Products from "./components/Products";
-import Testimonials from "./components/Testimonials";
+import DecorProducts from "./components/DecorProducts";
+import KitchenProducts from "./components/KitchenProducts";
+import OfficeProducts from "./components/OfficeProducts";
+import AboutSection from "./components/AboutSection";
 import Footer from "./components/Footer";
 import Collection from "./pages/Collection";
 
@@ -68,19 +68,22 @@ export default function App() {
             path="/"
             element={
               <>
-                <Main />
+                <HomeHero />
                 <Categories />
-                <WhyChoose />
-                <Statistics />
-                <Products />
-                <Testimonials />
+                <DecorProducts />
+                <KitchenProducts />
+                <OfficeProducts />
+                <AboutSection />
                 <Footer />
               </>
             }
           />
 
           {/* ABOUT PAGE */}
-          <Route path="/gt" element={<GioiThieu />} />
+          <Route path="/gioi-thieu" element={<GioiThieu />} />
+
+          {/* BACKWARD COMPAT */}
+          <Route path="/gt" element={<Navigate to="/gioi-thieu" replace />} />
 
           {/* SEARCH PAGE */}
           <Route path="/search" element={<Search />} />
@@ -91,7 +94,6 @@ export default function App() {
           {/* CONTACT PAGE */}
           <Route path="/lienhe" element={<LienHe />} />
 
-          {/* BACKWARD COMPAT */}
           <Route path="/news" element={<Navigate to="/lienhe" replace />} />
 
           {/* PRODUCT DETAIL PAGE */}

@@ -131,4 +131,13 @@ frontend/
 - Backend: chạy server API trước (Express + MongoDB).
 - Frontend: chạy Vite dev server.
 
+### Cấu hình gửi email (trang Liên hệ)
+Backend có endpoint `POST /api/contact` để gửi email về Gmail của bạn.
+
+Thêm vào `backend/.env`:
+- `SMTP_USER` = Gmail của bạn
+- `SMTP_PASS` = App Password (khuyến nghị dùng App Password, không dùng mật khẩu Gmail thường)
+- `CONTACT_TO` = Gmail nhận (có thể trùng `SMTP_USER`)
+- (tuỳ chọn) `SMTP_HOST` (mặc định `smtp.gmail.com`), `SMTP_PORT` (mặc định `465`), `SMTP_SECURE` (`true`/`false`)
+
 Nếu bạn gửi domain thật, mình sẽ cập nhật cấu hình `SITE_URL` mẫu và chuẩn hoá sitemap SEO theo domain đó.
